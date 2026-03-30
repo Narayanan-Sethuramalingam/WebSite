@@ -1,192 +1,812 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Koomapatti Village – Virudhunagar, Tamil Nadu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Koomapatti is a peaceful village in Virudhunagar district, Tamil Nadu, known for its agriculture and culture.">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f5f5;
-            color: #333;
-        }
-        header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 20px 10%;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        header p {
-            margin: 5px 0 0;
-        }
-        nav {
-            background: #1abc9c;
-            padding: 10px 10%;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-right: 15px;
-            font-weight: bold;
-        }
-        main {
-            padding: 20px 10%;
-            background: #fff;
-        }
-        section {
-            margin-bottom: 30px;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #1abc9c;
-            padding-bottom: 5px;
-        }
-        .info-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .card {
-            background: #fafafa;
-            border: 1px solid #ddd;
-            padding: 15px;
-            flex: 1 1 250px;
-            border-radius: 4px;
-        }
-        footer {
-            background: #2c3e50;
-            color: #fff;
-            text-align: center;
-            padding: 15px 10%;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 600px) {
-            header, nav, main, footer {
-                padding: 15px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koomapatti Village – Virudhunagar, Tamil Nadu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & VARIABLES ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --saffron:   #F97316;
+      --turmeric:  #FBBF24;
+      --leaf:      #22C55E;
+      --deep-leaf: #15803D;
+      --sky:       #38BDF8;
+      --earth:     #92400E;
+      --cream:     #FFFBEB;
+      --dark:      #1C1917;
+      --accent:    #EC4899;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── DECORATIVE BORDER PATTERN ─────────────────────────── */
+    .kolam-border {
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--saffron) 0px, var(--saffron) 20px,
+        var(--turmeric) 20px, var(--turmeric) 40px,
+        var(--leaf) 40px, var(--leaf) 60px,
+        var(--sky) 60px, var(--sky) 80px,
+        var(--accent) 80px, var(--accent) 100px
+      );
+    }
+
+    /* ── NAVIGATION ────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(28,25,23,0.97);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 62px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .nav-logo {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.3rem;
+      color: var(--turmeric);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--saffron); }
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #D1D5DB;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav-links a:hover {
+      background: var(--saffron);
+      color: #fff;
+    }
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--turmeric); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu { display: none; }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    #home {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        linear-gradient(170deg, rgba(21,128,61,0.82) 0%, rgba(249,115,22,0.78) 55%, rgba(56,189,248,0.7) 100%),
+        url('https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=1600&q=80') center/cover no-repeat;
+    }
+    .hero-content {
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+      animation: fadeUp 1s ease both;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--turmeric);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      font-family: 'Yatra One', cursive;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      line-height: 1.1;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      margin-bottom: 0.6rem;
+    }
+    .hero-content h1 .sub {
+      display: block;
+      font-family: 'Lora', serif;
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.88);
+      margin-top: 0.3rem;
+    }
+    .hero-content p {
+      max-width: 540px;
+      margin: 1rem auto 2rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.92);
+    }
+    .hero-pills {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.5);
+      color: #fff;
+      padding: 0.5rem 1.3rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .pill:hover { background: var(--saffron); transform: translateY(-2px); }
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* ── SECTIONS SHARED ───────────────────────────────────── */
+    section { padding: 5rem 1.5rem; }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-header .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 0.5rem;
+    }
+    .section-header h2 {
+      font-family: 'Yatra One', cursive;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .section-header p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #57534E;
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--saffron), var(--turmeric));
+      border-radius: 2px;
+      margin: 1rem auto 0;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .about-text h3 {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.7rem;
+      color: var(--deep-leaf);
+      margin-bottom: 1rem;
+    }
+    .about-text p {
+      font-family: 'Lora', serif;
+      line-height: 1.8;
+      color: #44403C;
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .info-card {
+      background: var(--cream);
+      border-left: 4px solid var(--saffron);
+      padding: 1rem 1.2rem;
+      border-radius: 0 10px 10px 0;
+    }
+    .info-card .label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--saffron); }
+    .info-card .value { font-weight: 800; font-size: 1rem; color: var(--dark); margin-top: 2px; }
+
+    /* ── DAM GALLERY ───────────────────────────────────────── */
+    #dam { background: linear-gradient(135deg, #EFF6FF 0%, #ECFDF5 100%); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+      background: #ccc;
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .gallery-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.06); }
+    .gallery-card .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.75));
+      color: #fff;
+      padding: 2rem 1rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+    .gallery-card .caption span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+    /* Featured card */
+    .gallery-card.featured {
+      grid-column: span 2;
+      aspect-ratio: 16/7;
+    }
+
+    /* ── PADDY SECTION ─────────────────────────────────────── */
+    #paddy {
+      background:
+        linear-gradient(rgba(21,128,61,0.88), rgba(21,128,61,0.88)),
+        url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&q=80') center/cover fixed;
+      color: #fff;
+    }
+    #paddy .section-header h2 { color: #fff; }
+    #paddy .section-header p { color: rgba(255,255,255,0.8); }
+    #paddy .eyebrow { color: var(--turmeric); }
+    .paddy-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .paddy-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .paddy-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-4px); }
+    .paddy-card .icon { font-size: 2.8rem; margin-bottom: 0.8rem; }
+    .paddy-card h3 { font-family: 'Yatra One', cursive; font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .paddy-card p { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.82); }
+    .paddy-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+    }
+    .paddy-gallery img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid rgba(255,255,255,0.3);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .paddy-gallery img:hover { border-color: var(--turmeric); transform: scale(1.04); }
+
+    /* ── CULTURE ───────────────────────────────────────────── */
+    #culture { background: #FFF7ED; }
+    .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .culture-tile {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-bottom: 4px solid var(--turmeric);
+    }
+    .culture-tile:nth-child(2) { border-color: var(--saffron); }
+    .culture-tile:nth-child(3) { border-color: var(--leaf); }
+    .culture-tile:nth-child(4) { border-color: var(--sky); }
+    .culture-tile:nth-child(5) { border-color: var(--accent); }
+    .culture-tile:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+    .culture-tile .icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .culture-tile h3 { font-weight: 800; font-size: 1rem; color: var(--dark); }
+    .culture-tile p { font-size: 0.82rem; color: #78716C; margin-top: 0.4rem; line-height: 1.5; }
+
+    /* ── CONTACT / MAP ─────────────────────────────────────── */
+    #contact { background: var(--dark); color: #fff; }
+    #contact .section-header h2 { color: #fff; }
+    #contact .section-header p { color: #A8A29E; }
+    #contact .eyebrow { color: var(--turmeric); }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .contact-row .ci { font-size: 1.5rem; flex-shrink: 0; }
+    .contact-row .ct .label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.15em; color: var(--saffron); }
+    .contact-row .ct .val { font-size: 0.95rem; color: #D6D3D1; margin-top: 2px; line-height: 1.6; }
+    .map-embed {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid rgba(255,255,255,0.1);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .map-embed iframe { display: block; width: 100%; height: 300px; }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    footer {
+      background: #0C0A09;
+      color: #A8A29E;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+    }
+    footer .ft-logo {
+      font-family: 'Yatra One', cursive;
+      font-size: 1.4rem;
+      color: var(--turmeric);
+      margin-bottom: 0.5rem;
+    }
+    footer p { line-height: 1.7; }
+    footer a { color: var(--saffron); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── LIGHTBOX ──────────────────────────────────────────── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img { max-width: 90vw; max-height: 80vh; border-radius: 12px; box-shadow: 0 8px 60px rgba(0,0,0,0.8); }
+    #lightbox .lb-caption { color: #fff; margin-top: 1rem; font-size: 1rem; font-weight: 700; }
+    #lightbox .lb-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ── ANIMATIONS ────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-8px); }
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 62px; left: 0; right: 0; background: #1C1917; padding: 1rem; gap: 0.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { border-radius: 8px; padding: 0.6rem 1rem; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; }
+      .gallery-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+      .paddy-gallery { grid-template-columns: repeat(2, 1fr); }
+      .contact-layout { grid-template-columns: 1fr; }
+      .info-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .paddy-gallery { grid-template-columns: 1fr; }
+      .info-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Koomapatti Village</h1>
-    <p>Virudhunagar District PIN - 626133, Tamil Nadu, India</p>
-</header>
+<!-- Top decorative border -->
+<div class="kolam-border"></div>
 
+<!-- NAVIGATION -->
 <nav>
-    <a href="#about">About</a>
-    <a href="#location">Location</a>
-    <a href="#culture">Culture</a>
-    <a href="#economy">Economy</a>
-    <a href="#life">LifeStyle</a>
+  <a class="nav-logo" href="#home">Koomapatti <span>Village</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">🏠 Home</a></li>
+    <li><a href="#about">ℹ️ About</a></li>
+    <li><a href="#dam">💧 Pilavakkal Dam</a></li>
+    <li><a href="#paddy">🌾 Paddy Lands</a></li>
+    <li><a href="#culture">🎊 Culture</a></li>
+    <li><a href="#contact">📍 Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<main>
-    <section id="about">
-        <h2>About Koomapatti</h2>
-        <p>
-            Koomapatti is a small and peaceful village located in the Virudhunagar district of Tamil Nadu.
-            Surrounded by fields and gentle countryside, the village reflects the traditional rural lifestyle
-            of southern Tamil Nadu, with close-knit families, age-old customs, and a strong sense of community.
-        </p>
-    </section>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-badge">📍 Virudhunagar District · PIN 626133</div>
+    <h1>
+      Koomapatti
+      <span class="sub">Koomapatti – A Village of Nature & Heritage</span>
+    </h1>
+    <p>Nestled in the heart of Tamil Nadu, Koomapatti is a serene agrarian village blessed with lush paddy fields, the majestic Pilavakkal Dam, and a vibrant cultural tradition passed through generations.</p>
+    <div class="hero-pills">
+      <a href="#dam" class="pill">💧 Pilavakkal Dam</a>
+      <a href="#paddy" class="pill">🌾 Paddy Fields</a>
+      <a href="#culture" class="pill">🎊 Our Culture</a>
+      <a href="#contact" class="pill">📍 Find Us</a>
+    </div>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
 
-    <section id="location">
-        <h2>Location & Connectivity</h2>
-        <div class="info-grid">
-            <div class="card">
-                <h3>Geographical Setting</h3>
-                <p>
-                    Koomapatti lies in the southern part of Tamil Nadu, within Virudhunagar district.
-                    The region experiences a warm climate, with distinct summer and monsoon seasons.
-                </p>
-            </div>
-            <div class="card">
-                <h3>Nearby Towns</h3>
-                <p>
-                    The village is connected by local roads to nearby towns and markets in Virudhunagar district.
-                    Residents often travel to nearby towns for higher education, healthcare, and trade.
-                </p>
-            </div>
-            <div class="card">
-                <h3>Transport</h3>
-                <p>
-                    Public and private buses, along with shared autos, are commonly used for transportation.
-                    Many families also rely on two-wheelers and bicycles for daily commuting.
-                </p>
-            </div>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <div class="eyebrow">Our Village</div>
+    <h2>About Koomapatti</h2>
+    <p>A quiet treasure in Virudhunagar district, where tradition meets tranquility</p>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <h3>Where Roots Run Deep</h3>
+      <p>Koomapatti is a peaceful village located in Virudhunagar district, Tamil Nadu. The village is known for its rich agricultural heritage, predominantly cultivating paddy (rice) with the blessing of the Pilavakkal Dam's water resources.</p>
+      <p>The community here is warm and closely-knit, celebrating Tamil festivals with great enthusiasm. From Pongal harvest celebrations to temple festivals, every occasion is marked with colour, music, and unity.</p>
+      <p>Surrounded by hills, fields, and reservoirs, Koomapatti offers a rare slice of rural Tamil Nadu life — unspoiled and authentic.</p>
+    </div>
+    <div class="info-cards reveal">
+      <div class="info-card">
+        <div class="label">District</div>
+        <div class="value">Virudhunagar</div>
+      </div>
+      <div class="info-card">
+        <div class="label">State</div>
+        <div class="value">Tamil Nadu</div>
+      </div>
+      <div class="info-card">
+        <div class="label">PIN Code</div>
+        <div class="value">626133</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Language</div>
+        <div class="value">Tamil</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Main Crop</div>
+        <div class="value">Paddy (Rice)</div>
+      </div>
+      <div class="info-card">
+        <div class="label">Water Source</div>
+        <div class="value">Pilavakkal Dam</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILAVAKKAL DAM -->
+<section id="dam">
+  <div class="section-header reveal">
+    <div class="eyebrow">Natural Landmark</div>
+    <h2>Pilavakkal Dam</h2>
+    <p>The life-giving reservoir that sustains our fields, our homes, and our hearts</p>
+    <div class="divider"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-card featured reveal" onclick="openLightbox(this)">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Pilavakkal_Dam.jpg/1280px-Pilavakkal_Dam.jpg"
+        alt="Pilavakkal Dam panorama"
+        onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80'"
+      />
+      <div class="caption">Pilavakkal Dam — Full View <span>Vathirairuppu, Virudhunagar</span></div>
+    </div>
+    <div class="gallery-card reveal" onclick="openLightbox(this)">
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80"
+        alt="Dam reservoir surrounded by hills"
+      />
+      <div class="caption">Reservoir at Dusk <span>Golden light on still waters</span></div>
+    </div>
+    <div class="gallery-card reveal" onclick="openLightbox(this)">
+      <img
+        src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=700&q=80"
+        alt="Aerial green hills near dam"
+      />
+      <div class="caption">Green Hills Surrounding <span>Nature's embrace around the dam</span></div>
+    </div>
+    <div class="gallery-card reveal" onclick="openLightbox(this)">
+      <img
+        src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=700&q=80"
+        alt="Water channel irrigation"
+      />
+      <div class="caption">Irrigation Canals <span>Water flowing to the fields</span></div>
+    </div>
+  </div>
+
+  <!-- Dam facts -->
+  <div style="max-width:900px;margin:3rem auto 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;">
+    <div class="paddy-card" style="background:#EFF6FF;border:1px solid #BAE6FD;color:#0C4A6E;border-radius:14px;padding:1.5rem;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:.5rem;">💧</div>
+      <div style="font-weight:800;font-size:1.1rem;">Irrigation</div>
+      <div style="font-size:.83rem;margin-top:.3rem;opacity:.8;">Feeds thousands of acres of farmland</div>
+    </div>
+    <div class="paddy-card" style="background:#F0FDF4;border:1px solid #BBF7D0;color:#14532D;border-radius:14px;padding:1.5rem;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:.5rem;">🐦</div>
+      <div style="font-weight:800;font-size:1.1rem;">Wildlife</div>
+      <div style="font-size:.83rem;margin-top:.3rem;opacity:.8;">Home to migratory birds and local fauna</div>
+    </div>
+    <div class="paddy-card" style="background:#FFF7ED;border:1px solid #FED7AA;color:#7C2D12;border-radius:14px;padding:1.5rem;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:.5rem;">🌄</div>
+      <div style="font-weight:800;font-size:1.1rem;">Scenic Spot</div>
+      <div style="font-size:.83rem;margin-top:.3rem;opacity:.8;">Popular for picnics and nature walks</div>
+    </div>
+    <div class="paddy-card" style="background:#FDF4FF;border:1px solid #E9D5FF;color:#581C87;border-radius:14px;padding:1.5rem;text-align:center;">
+      <div style="font-size:2rem;margin-bottom:.5rem;">🚣</div>
+      <div style="font-weight:800;font-size:1.1rem;">Recreation</div>
+      <div style="font-size:.83rem;margin-top:.3rem;opacity:.8;">Boating and leisure on calm waters</div>
+    </div>
+  </div>
+</section>
+
+<!-- PADDY LANDS -->
+<section id="paddy">
+  <div class="section-header reveal">
+    <div class="eyebrow">Agriculture</div>
+    <h2>🌾 Paddy Fields</h2>
+    <p>The golden-green heart of Koomapatti — where every grain tells a story</p>
+    <div class="divider" style="background:linear-gradient(90deg,#FBBF24,#fff);"></div>
+  </div>
+  <div class="paddy-cards">
+    <div class="paddy-card reveal">
+      <div class="icon">🌱</div>
+      <h3>Sowing Season</h3>
+      <p>Farmers begin sowing in June–July, carefully transplanting paddy seedlings into flooded fields, marking the start of the agricultural year.</p>
+    </div>
+    <div class="paddy-card reveal">
+      <div class="icon">☀️</div>
+      <h3>Growing Season</h3>
+      <p>The lush green fields transform under the Tamil Nadu sun. Village life revolves around tending the crops, singing folk songs while working.</p>
+    </div>
+    <div class="paddy-card reveal">
+      <div class="icon">🌾</div>
+      <h3>Harvest – Pongal</h3>
+      <p>January brings the joyous Pongal harvest festival — a time of thanksgiving to the sun and earth, celebrated with kolam, music, and feast.</p>
+    </div>
+    <div class="paddy-card reveal">
+      <div class="icon">💧</div>
+      <h3>Pilavakkal Waters</h3>
+      <p>The dam's canal network is the lifeline of agriculture here, ensuring water reaches every field through a centuries-old irrigation system.</p>
+    </div>
+  </div>
+  <div class="paddy-gallery reveal">
+    <img src="https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=400&q=80" alt="Paddy transplanting" />
+    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&q=80" alt="Green paddy fields" />
+    <img src="https://images.unsplash.com/photo-1574607383153-a2e9c8de4b60?w=400&q=80" alt="Harvest time" onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&q=80'" />
+  </div>
+</section>
+
+<!-- CULTURE -->
+<section id="culture">
+  <div class="section-header reveal">
+    <div class="eyebrow">Heritage & Traditions</div>
+    <h2>Our Culture</h2>
+    <p>Rich in Tamil tradition, every festival and art form keeps our roots alive</p>
+    <div class="divider"></div>
+  </div>
+  <div class="culture-grid">
+    <div class="culture-tile reveal">
+      <div class="icon">🎆</div>
+      <h3>Pongal Festival</h3>
+      <p>The grand harvest celebration with Kolam art, sugarcane, and boiling sweet rice pots</p>
+    </div>
+    <div class="culture-tile reveal">
+      <div class="icon">🏛️</div>
+      <h3>Temple Festivals</h3>
+      <p>Vibrant temple chariot processions with nadaswaram music and traditional rituals</p>
+    </div>
+    <div class="culture-tile reveal">
+      <div class="icon">🎨</div>
+      <h3>Kolam Art</h3>
+      <p>Intricate rice-flour geometric patterns drawn at doorsteps every sunrise</p>
+    </div>
+    <div class="culture-tile reveal">
+      <div class="icon">🥁</div>
+      <h3>Folk Music</h3>
+      <p>Urumi melam and traditional folk songs during harvest and celebrations</p>
+    </div>
+    <div class="culture-tile reveal">
+      <div class="icon">🍛</div>
+      <h3>Cuisine</h3>
+      <p>Authentic Tamil meals — freshly cooked rice, sambar, rasam, and banana leaf feasts</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="eyebrow">Find Us</div>
+    <h2>Location & Contact</h2>
+    <p>Koomapatti village is located in Virudhunagar district, Tamil Nadu</p>
+    <div class="divider" style="background:linear-gradient(90deg,var(--saffron),var(--turmeric));"></div>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info reveal">
+      <div class="contact-row">
+        <div class="ci">📍</div>
+        <div class="ct">
+          <div class="label">Address</div>
+          <div class="val">Koomapatti Village<br>Virudhunagar District<br>Tamil Nadu – 626133<br>India</div>
         </div>
-    </section>
-
-    <section id="culture">
-        <h2>Culture & Traditions</h2>
-        <p>
-            The culture of Koomapatti is deeply rooted in Tamil traditions. Tamil is the primary language spoken,
-            and festivals are celebrated with devotion and enthusiasm. Temples play a central role in the social
-            and spiritual life of the village.
-        </p>
-        <ul>
-            <li><strong>Festivals:</strong> Pongal, Deepavali, and local temple festivals are major celebrations.</li>
-            <li><strong>Food:</strong> Traditional Tamil dishes like rice, sambar, rasam, and millets are common.</li>
-            <li><strong>Community:</strong> People often gather for functions, religious events, and village meetings.</li>
-        </ul>
-    </section>
-
-    <section id="economy">
-        <h2>Economy & Occupation</h2>
-        <p>
-            Agriculture is the backbone of Koomapatti’s economy. Many families are engaged in farming and related activities,
-            depending on seasonal rains and local water sources for irrigation.
-        </p>
-        <ul>
-            <li><strong>Main Occupation:</strong> Agriculture and farm labor.</li>
-            <li><strong>Crops:</strong> Typical crops in the region include paddy, millets, pulses, and cotton (depending on water availability).</li>
-            <li><strong>Other Work:</strong> Some villagers work in nearby towns, small businesses, or daily wage jobs.</li>
-        </ul>
-    </section>
-
-    <section id="life">
-        <h2>Everyday Life in Koomapatti</h2>
-        <p>
-            Life in Koomapatti is simple and community-oriented. Mornings often begin early with farm work,
-            temple visits, and children going to school. Evenings are spent with family, neighbors, and
-            community gatherings.
-        </p>
-        <div class="info-grid">
-            <div class="card">
-                <h3>Education</h3>
-                <p>
-                    The village typically has access to primary schooling, while students may travel to nearby
-                    towns for higher education and specialized courses.
-                </p>
-            </div>
-            <div class="card">
-                <h3>Environment</h3>
-                <p>
-                    The surroundings include fields, trees, and open spaces, offering a calm and natural
-                    environment compared to busy urban areas.
-                </p>
-            </div>
-            <div class="card">
-                <h3>Community Spirit</h3>
-                <p>
-                    People in Koomapatti often support each other during festivals, weddings, and difficult times,
-                    reflecting strong social bonds and shared values.
-                </p>
-            </div>
+      </div>
+      <div class="contact-row">
+        <div class="ci">🏛️</div>
+        <div class="ct">
+          <div class="label">District HQ</div>
+          <div class="val">Virudhunagar<br>(~20 km from village)</div>
         </div>
-    </section>
-</main>
+      </div>
+      <div class="contact-row">
+        <div class="ci">🚆</div>
+        <div class="ct">
+          <div class="label">Nearest Railway</div>
+          <div class="val">Virudhunagar Junction<br>Srivilliputhur Railway Station</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="ci">✈️</div>
+        <div class="ct">
+          <div class="label">Nearest Airport</div>
+          <div class="val">Madurai International Airport<br>(~65 km)</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-embed reveal">
+      <iframe
+        title="Koomapatti Village Map"
+        src="https://maps.google.com/maps?q=Koomapatti,Virudhunagar,Tamil+Nadu+626133&z=13&output=embed"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
 
+<!-- FOOTER -->
+<div class="kolam-border"></div>
 <footer>
-    &copy; 2026 Koomapatti Village – Virudhunagar District, Tamil Nadu, India
+  <div class="ft-logo">Koomapatti</div>
+  <p>Koomapatti Village, Virudhunagar District, Tamil Nadu – 626133</p>
+  <p style="margin-top:.4rem;">Celebrating our roots, our land, our people.</p>
+  <p style="margin-top:1rem;font-size:.78rem;color:#57534E;">
+    Built with ❤️ for the people of Koomapatti ·
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </p>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <div class="lb-close" onclick="closeLightbox()">✕</div>
+  <img id="lb-img" src="" alt="" />
+  <div class="lb-caption" id="lb-cap"></div>
+</div>
+
+<script>
+  /* ── Nav hamburger ── */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  /* ── Scroll reveal ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Lightbox ── */
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    const cap = card.querySelector('.caption');
+    document.getElementById('lb-img').src = img.src;
+    document.getElementById('lb-img').alt = img.alt;
+    document.getElementById('lb-cap').textContent = cap ? cap.textContent.trim() : '';
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
 </body>
 </html>
